@@ -189,6 +189,7 @@ public class CountdownController : MonoBehaviour
     #region Mono
     void Start()
     {
+        this.splitC.showSplits = true;
         this.notiPanel.gameObject.SetActive(false);
         this.scoreText.text = "0";
         NotifyStart();
