@@ -90,6 +90,7 @@ public class CountdownController : MonoBehaviour
     // for notification button
     public void NotificationAccept()
     {
+        Handheld.Vibrate();
         // add score to list
         if (playerWonThisRound && roundStarted)
         {

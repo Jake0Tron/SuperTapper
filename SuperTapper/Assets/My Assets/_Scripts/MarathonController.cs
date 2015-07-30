@@ -85,6 +85,7 @@ public class MarathonController : MonoBehaviour
     // for notification button
     public void NotificationAccept()
     {
+        Handheld.Vibrate();
         this.startTime=this.curTime;
         this.endTime = this.startTime + this.countdownTime;
         HideButton();
