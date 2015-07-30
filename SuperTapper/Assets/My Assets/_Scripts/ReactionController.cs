@@ -19,6 +19,11 @@ public class ReactionController : MonoBehaviour {
     public float startTime, curTime, endTime, splitTime;
 
 
+    public void React()
+    {
+        Debug.Log(this.splitTime);
+    }
+
     public void NotifyStart()
     {
         this.notiP.gameObject.SetActive(true);
@@ -54,7 +59,8 @@ public class ReactionController : MonoBehaviour {
     void UpdateTimer()
     {
         // take split outside countdown
-        splitTime = (this.endTime - this.curTime);
+        this.splitTime = (this.endTime - this.curTime);
+
         string timer = "";
         if (countingDown)
         {
