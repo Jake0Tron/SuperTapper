@@ -5,17 +5,15 @@ using System.Collections;
 public class MechanicalController : MonoBehaviour {
 
     public Button[] buttons;    // populated in inspector
+    public AudioSource[] sounds; // populated in inspector
 
     public void TestSwitch(int index)
     {
-        switch (index){
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
+        if (index < 5 && index >= 0)
+        {
+            Handheld.Vibrate();
         }
+        sounds[index].Play();
 
     }
 
