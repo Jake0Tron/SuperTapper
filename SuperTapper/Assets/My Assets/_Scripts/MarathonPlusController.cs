@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 
-public class MarathonController : MonoBehaviour
+public class MarathonPlusController : MonoBehaviour
 {
     /// <summary>
     ///  Controls the logic of the Countdown game, timer and click counting
@@ -20,6 +20,7 @@ public class MarathonController : MonoBehaviour
 
     public bool countingDown;
     public bool roundStarted;
+    public bool leftFoot;
     private bool statsSaved;
 
     public float countdownTime = 25.0f;
@@ -33,9 +34,30 @@ public class MarathonController : MonoBehaviour
     // Scores
     public float score;
 
-    public void AddClick()
+    public void NotificationAccept()
     {
-        this.numberOfClicks++;
+        Handheld.Vibrate();
+        this.startTime = this.curTime;
+        this.endTime = this.startTime + this.countdownTime;
+        HideButton();
+        this.notiPanel.gameObject.SetActive(false);
+        this.clickButton.gameObject.SetActive(true);
+        this.countingDown = true;
+        this.roundStarted = true;
+        this.statsSaved = false;
+    }
+    public void AddClick(bool left)
+    {
+        if (left && leftFoot)
+        {
+            this.numberOfClicks++;
+            this.leftFoot = false;
+        }
+        else if (!left && !leftFoot)
+        {
+            this.numberOfClicks++;
+            this.leftFoot = true;
+        }
     }
     #region Notifiers
     private void NotifyStart()
@@ -83,19 +105,6 @@ public class MarathonController : MonoBehaviour
     }
     // LOGIC IN HERE
     // for notification button
-    public void NotificationAccept()
-    {
-        Handheld.Vibrate();
-        this.startTime=this.curTime;
-        this.endTime = this.startTime + this.countdownTime;
-        HideButton();
-        this.notiPanel.gameObject.SetActive(false);
-        this.clickButton.gameObject.SetActive(true);
-        this.scoreText.gameObject.SetActive(true);
-        this.countingDown = true;
-        this.roundStarted = true;
-        this.statsSaved = false;
-    }
     #endregion Notifiers
     #region Updaters
 
@@ -129,8 +138,7 @@ public class MarathonController : MonoBehaviour
     {
         this.splitC.showSplits = false;
         this.notiPanel.gameObject.SetActive(false);
-        this.scoreText.gameObject.SetActive(false);
-        this.scoreText.text = "";
+        this.scoreText.text = "0";
         this.countdownTime = 25.0f;
         NotifyStart();
     }

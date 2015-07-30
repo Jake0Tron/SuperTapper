@@ -69,6 +69,7 @@
     <Compile Include="Assets\My Assets\_Scripts\EscapeHandler.cs" />
     <Compile Include="Assets\My Assets\_Scripts\MainMenuController.cs" />
     <Compile Include="Assets\My Assets\_Scripts\MarathonController.cs" />
+    <Compile Include="Assets\My Assets\_Scripts\MarathonPlusController.cs" />
     <Compile Include="Assets\My Assets\_Scripts\MechanicalController.cs" />
     <Compile Include="Assets\My Assets\_Scripts\SplitController.cs" />
   </ItemGroup>
