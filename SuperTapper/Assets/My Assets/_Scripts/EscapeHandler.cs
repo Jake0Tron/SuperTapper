@@ -17,7 +17,12 @@ public class EscapeHandler : MonoBehaviour
         {
             Handheld.Vibrate();
             // HANDLE ESCAPE HERE
-            Application.LoadLevel(0);
+            if (Application.loadedLevel != 0)
+                Application.LoadLevel(0);
+            else
+            {
+                Application.Quit();
+            }
         }
     }
 }
