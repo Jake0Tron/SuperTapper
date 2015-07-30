@@ -116,7 +116,6 @@ public class MarathonController : MonoBehaviour
         }
         else
         {
-
             TimeSpan timeSpan = TimeSpan.FromSeconds(countdownTime);
             timer = string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds);
         }
