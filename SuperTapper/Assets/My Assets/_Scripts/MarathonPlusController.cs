@@ -10,7 +10,7 @@ public class MarathonPlusController : MonoBehaviour
     /// </summary>
 
     // UI
-    public Button clickButton;
+    public Button clickButtonL, clickButtonR;
     public Text timerText, scoreText, notificationTitle, notificationContent;
     public SplitController splitC;
 
@@ -37,11 +37,13 @@ public class MarathonPlusController : MonoBehaviour
     public void NotificationAccept()
     {
         Handheld.Vibrate();
+        this.numberOfClicks = 0;
         this.startTime = this.curTime;
         this.endTime = this.startTime + this.countdownTime;
         HideButton();
         this.notiPanel.gameObject.SetActive(false);
-        this.clickButton.gameObject.SetActive(true);
+        this.clickButtonL.gameObject.SetActive(true);
+        this.clickButtonR.gameObject.SetActive(true);
         this.countingDown = true;
         this.roundStarted = true;
         this.statsSaved = false;
@@ -65,7 +67,8 @@ public class MarathonPlusController : MonoBehaviour
         this.countingDown = false;
         this.roundStarted = false;
         this.splitC.EnableStats();
-        this.clickButton.gameObject.SetActive(false);
+        this.clickButtonL.gameObject.SetActive(false);
+        this.clickButtonR.gameObject.SetActive(false);
         this.notiPanel.gameObject.SetActive(true);
         Invoke("ShowButton", buttonShowCooldown);
         this.notificationContent.text = "Welcome to Marathon! Click the button as may times as you can in " + this.countdownTime + " seconds!\nReady?";
@@ -74,7 +77,8 @@ public class MarathonPlusController : MonoBehaviour
 
     private void NotifyVictory()
     {
-        this.clickButton.gameObject.SetActive(false);
+        this.clickButtonL.gameObject.SetActive(false);
+        this.clickButtonR.gameObject.SetActive(false);
         this.splitC.marathons.Add(numberOfClicks);
         this.splitC.EnableStats();
         Invoke("ShowButton", buttonShowCooldown);

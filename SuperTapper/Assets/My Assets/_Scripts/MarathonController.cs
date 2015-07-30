@@ -58,7 +58,6 @@ public class MarathonController : MonoBehaviour
         Invoke("ShowButton", buttonShowCooldown);
         this.notiPanel.gameObject.SetActive(true);
         //HideButton();
-        score = this.countdownTime - this.splitTime;
         this.notificationContent.text = "You Tapped " + numberOfClicks + " times in " + this.countdownTime + " seconds! Try again?";
         this.notificationTitle.text = "Congrats!";
     }
@@ -86,6 +85,7 @@ public class MarathonController : MonoBehaviour
     public void NotificationAccept()
     {
         Handheld.Vibrate();
+        this.numberOfClicks = 0;
         this.startTime=this.curTime;
         this.endTime = this.startTime + this.countdownTime;
         HideButton();
