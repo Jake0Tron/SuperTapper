@@ -9,7 +9,7 @@ public class MechanicalController : MonoBehaviour {
 
     public void TestSwitch(int index)
     {
-        if (index < 5 && index >= 0)
+        if (index <= 5 && index >= 0)
         {
             Handheld.Vibrate();
         }

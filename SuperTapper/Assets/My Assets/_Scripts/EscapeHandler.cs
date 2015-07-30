@@ -15,6 +15,7 @@ public class EscapeHandler : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
+            Handheld.Vibrate();
             // HANDLE ESCAPE HERE
             Application.LoadLevel(0);
         }
