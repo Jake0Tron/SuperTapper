@@ -44,7 +44,7 @@ public class CountdownController : MonoBehaviour
         this.countingDown = false;
         this.playerWonThisRound = false;
         this.roundStarted = false;
-        this.splitC.EnableStats();
+        this.splitC.EnableStats(SplitController.statsToShow.SPLITS);
         this.clickButton.gameObject.SetActive(false);
         this.notiPanel.gameObject.SetActive(true);
         Invoke("ShowButton", buttonShowCooldown);
@@ -57,7 +57,7 @@ public class CountdownController : MonoBehaviour
         this.clickButton.gameObject.SetActive(false);
         this.splitC.splits.Add(score);
         this.playerWonThisRound = true;
-        this.splitC.EnableStats();
+        this.splitC.EnableStats(SplitController.statsToShow.SPLITS);
         Invoke("ShowButton", buttonShowCooldown);
         this.notiPanel.gameObject.SetActive(true);
         //HideButton();
@@ -71,7 +71,7 @@ public class CountdownController : MonoBehaviour
         Invoke("ShowButton", buttonShowCooldown);
         this.clickButton.gameObject.SetActive(false);
         this.notiPanel.gameObject.SetActive(true);
-        this.splitC.EnableStats();
+        this.splitC.EnableStats(SplitController.statsToShow.SPLITS);
         this.notificationContent.text = "Oh no! You only tapped " + this.numberOfClicks + " times this round! Better luck Next time!";
         this.notificationTitle.text = "GOOD TRY!";
     }
@@ -190,7 +190,6 @@ public class CountdownController : MonoBehaviour
     #region Mono
     void Start()
     {
-        this.splitC.showSplits = true;
         this.notiPanel.gameObject.SetActive(false);
         this.scoreText.text = "0";
         NotifyStart();

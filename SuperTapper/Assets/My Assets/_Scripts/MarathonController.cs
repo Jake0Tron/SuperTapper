@@ -42,7 +42,7 @@ public class MarathonController : MonoBehaviour
     {
         this.countingDown = false;
         this.roundStarted = false;
-        this.splitC.EnableStats();
+        this.splitC.EnableStats(SplitController.statsToShow.MARATHONS);
         this.clickButton.gameObject.SetActive(false);
         this.notiPanel.gameObject.SetActive(true);
         Invoke("ShowButton", buttonShowCooldown);
@@ -54,7 +54,7 @@ public class MarathonController : MonoBehaviour
     {
         this.clickButton.gameObject.SetActive(false);
         this.splitC.marathons.Add(numberOfClicks);
-        this.splitC.EnableStats();
+        this.splitC.EnableStats(SplitController.statsToShow.MARATHONS);
         Invoke("ShowButton", buttonShowCooldown);
         this.notiPanel.gameObject.SetActive(true);
         //HideButton();
@@ -126,7 +126,6 @@ public class MarathonController : MonoBehaviour
     #region Mono
     void Start()
     {
-        this.splitC.showSplits = false;
         this.notiPanel.gameObject.SetActive(false);
         this.scoreText.gameObject.SetActive(false);
         this.scoreText.text = "";
