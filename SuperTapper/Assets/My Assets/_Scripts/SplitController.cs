@@ -15,7 +15,6 @@ public class SplitController : MonoBehaviour
     public List<int> marathons;
 
     public List<string> top3;
-
     public enum statsToShow
     {
         SPLITS,
@@ -28,29 +27,34 @@ public class SplitController : MonoBehaviour
 
     public void EnableStats(statsToShow state)
     {
-        if (state == statsToShow.SPLITS){
+        this.top3.Clear();
+
+        if (state == statsToShow.SPLITS)
+        {
             this.splits.Sort();
-            // top 3 splits
-            this.time1.text = this.splits[0].ToString();
-            this.time2.text = this.splits[1].ToString();
-            this.time3.text = this.splits[2].ToString();
-        }else if (state == statsToShow.MARATHONS)
+
+            this.top3.Add(this.splits[0].ToString());
+            this.top3.Add(this.splits[1].ToString());
+            this.top3.Add(this.splits[2].ToString());
+        }
+        else if (state == statsToShow.MARATHONS)
         {
             this.marathons.Sort();
             this.marathons.Reverse();
-            this.time1.text = this.marathons[0].ToString();
-            this.time2.text = this.marathons[1].ToString();
-            this.time3.text = this.marathons[2].ToString();
+
+            this.top3.Add(this.marathons[0].ToString());
+            this.top3.Add(this.marathons[1].ToString());
+            this.top3.Add(this.marathons[2].ToString());
         }
         else if (state == statsToShow.REACTIONS)
         {
             this.reactions.Sort();
-            this.time1.text = this.reactions[0].ToString();
-            this.time2.text = this.reactions[1].ToString();
-            this.time3.text = this.reactions[2].ToString();
+
+            this.top3.Add(this.reactions[0].ToString());
+            this.top3.Add(this.reactions[1].ToString());
+            this.top3.Add(this.reactions[2].ToString());
 
         }
-
         this.splitPanel.gameObject.SetActive(true);
     }
 
@@ -61,7 +65,9 @@ public class SplitController : MonoBehaviour
 
     void UpdateText()
     {
-        
+        this.time1.text = this.top3[0];
+        this.time2.text = this.top3[1];
+        this.time3.text = this.top3[2];
     }
 
     // Use this for initialization
@@ -70,6 +76,7 @@ public class SplitController : MonoBehaviour
         this.splits = new List<float>();
         this.reactions = new List<float>();
         this.marathons = new List<int>();
+        this.top3 = new List<string>();
 
         // dummy scores
         this.splits.Add(35.2345f);
@@ -90,6 +97,11 @@ public class SplitController : MonoBehaviour
         this.reactions.Add(0.51f);
         this.reactions.Add(0.512f);
         this.reactions.Add(0.512f);
+
+        this.top3.Add("");
+        this.top3.Add("");
+        this.top3.Add("");
+
         // sort lowest to highest
         this.splits.Sort();
         this.reactions.Sort();
@@ -97,8 +109,9 @@ public class SplitController : MonoBehaviour
         this.marathons.Sort();
         this.marathons.Reverse();
 
+
         // set start
-        EnableStats(statsToShow.REACTIONS);
+        // EnableStats(statsToShow.MARATHONS);
 
     }
 

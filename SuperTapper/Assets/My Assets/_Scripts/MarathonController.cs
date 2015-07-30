@@ -42,29 +42,31 @@ public class MarathonController : MonoBehaviour
     {
         this.countingDown = false;
         this.roundStarted = false;
-        this.splitC.EnableStats(SplitController.statsToShow.MARATHONS);
         this.clickButton.gameObject.SetActive(false);
-        this.notiPanel.gameObject.SetActive(true);
-        Invoke("ShowButton", buttonShowCooldown);
         this.notificationContent.text = "Welcome to Marathon! Click the button as may times as you can in " + this.countdownTime + " seconds!\nReady?";
         this.notificationTitle.text = "MARATHON";
+        this.notiPanel.gameObject.SetActive(true);
+        Invoke("ShowDelayed", buttonShowCooldown);
     }
 
     private void NotifyVictory()
     {
         this.clickButton.gameObject.SetActive(false);
         this.splitC.marathons.Add(numberOfClicks);
-        this.splitC.EnableStats(SplitController.statsToShow.MARATHONS);
-        Invoke("ShowButton", buttonShowCooldown);
         this.notiPanel.gameObject.SetActive(true);
         //HideButton();
         this.notificationContent.text = "You Tapped " + numberOfClicks + " times in " + this.countdownTime + " seconds! Try again?";
         this.notificationTitle.text = "Congrats!";
+        this.splitC.EnableStats(SplitController.statsToShow.MARATHONS);
+        Invoke("ShowDelayed", buttonShowCooldown);
     }
 
-    private void ShowButton()
+    private void ShowDelayed()
     {
         this.notiClose.gameObject.SetActive(true);
+        this.splitC.splitPanel.gameObject.SetActive(true);
+        this.splitC.EnableStats(SplitController.statsToShow.MARATHONS);
+
     }
 
     private void HideButton()
@@ -85,11 +87,13 @@ public class MarathonController : MonoBehaviour
     public void NotificationAccept()
     {
         Handheld.Vibrate();
+        this.splitC.DisableStats();
         this.numberOfClicks = 0;
         this.startTime=this.curTime;
         this.endTime = this.startTime + this.countdownTime;
         HideButton();
         this.notiPanel.gameObject.SetActive(false);
+        this.notiClose.gameObject.SetActive(false);
         this.clickButton.gameObject.SetActive(true);
         this.scoreText.gameObject.SetActive(true);
         this.countingDown = true;
@@ -127,9 +131,13 @@ public class MarathonController : MonoBehaviour
     void Start()
     {
         this.notiPanel.gameObject.SetActive(false);
+        this.notiClose.gameObject.SetActive(false);
+        this.splitC.splitPanel.gameObject.SetActive(false);
+
         this.scoreText.gameObject.SetActive(false);
         this.scoreText.text = "";
         this.countdownTime = 25.0f;
+        this.goalClicks = 60;
         NotifyStart();
     }
 
